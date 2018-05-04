@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
-export default class Category extends Component {
+export default class Edit extends Component {
   render() {
     return (
       <div>
-        Category View
+        Edit View.
       </div>
     );
   }
