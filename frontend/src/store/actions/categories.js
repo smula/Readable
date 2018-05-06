@@ -1,16 +1,17 @@
-import api from '..';
+import { fetchCategories, fetchCategory } from '../api';
 
-export const GET_CATEGORIES = 'GET_CATEGORIES';
+export const SET_CATEGORIES = 'SET_CATEGORIES';
 
 export function getAllCategories() {
   return dispatch => {
-    api
-      .get('/categories')
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err)
-      });
+    return fetchCategories()
+    .then(data => {dispatch(setAllCategories(data))})
+  }
+}
+
+export function setAllCategories(categories) {
+  return {
+    type: SET_CATEGORIES,
+    categories,
   }
 }

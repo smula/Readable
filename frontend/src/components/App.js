@@ -1,34 +1,34 @@
-import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
-import { Provider } from 'react-redux';
+import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './Home';
 import Category from './Category';
 import Edit from './Edit';
 import Create from './Create';
 import PostDetail from './PostDetail';
 import '../App.css';
-import store from '../store';
 
 const App = () => (
-  <Provider store={store}>
+  <BrowserRouter>
     <div className="App">
-      <Route exact path="/" render={() => (
-        <Home />
-      )}/>
-      <Route exact path="/create" render={() => (
-        <Create />
-      )}/>
-      <Route exact path="/:category" render={() => (
-        <Category />
-      )}/>
-      <Route exact path="/:category/:id" render={() => (
-        <PostDetail />
-      )}/>
-      <Route exact path="/:category/:id/edit" render={() => (
-        <Edit />
-      )}/>
+      <Switch>
+        <Route exact path="/" render={() => (
+          <Home />
+        )}/>
+        <Route exact path="/create" render={() => (
+          <Create />
+        )}/>
+        <Route exact path="/:category/posts" render={props => (
+          <Home {...props} />
+        )}/>
+        <Route exact path="/posts/:id" render={props => (
+          <PostDetail {...props} />
+        )}/>
+        <Route exact path="/:category/:id/edit" render={() => (
+          <Edit />
+        )}/>
+      </Switch>
     </div>
-  </Provider>
+  </BrowserRouter>
 );
 
 export default App;

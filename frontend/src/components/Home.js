@@ -1,34 +1,95 @@
 import React, { Component } from 'react';
-import { List, Header, Dropdown } from 'semantic-ui-react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { List, Header, Dropdown, Card, Button, Grid } from 'semantic-ui-react';
+import { getAllCategories } from '../store/actions';
+import PostsList from './PostsList';
 
-export default class Home extends Component {
+class Home extends Component {
+  state = {
+    sort: null,
+  }
+
+  componentDidMount() {
+    //console.log('mounted')
+    console.log(this.props)
+    const { getAllCategories } = this.props;
+   
+    getAllCategories();
+  }
+
+
   render() {
+    const sortOptions = [
+      {
+        value: 'voteScore',
+        text: 'Vote Score'
+      },
+      {
+        value: 'timestamp',
+        text: 'Timestamp',
+      },
+    ];
     return (
       <div>
-        <div>
-          <Header as="h1">Here should all the categories be listed</Header>
-          {/* <Dropdown placeholder="select category" /> */}
+        <div style={{ marginBottom: 30 }}>
+          <Header as="h1">Select category to see post from only that category</Header>
           <List>
-            <List.Item>Here should all the categories be listed</List.Item>
-            <List.Item>Here should all the categories be listed</List.Item>
-            <List.Item>Here should all the categories be listed</List.Item>
+            {
+              this.props.categories.map((category, index) => (
+                <List.Item key={`${category.name}.${index}`}>
+                  <Link to={`/${category.path}/posts`}>
+                    {
+                      category.name
+                    }
+                  </Link>
+                </List.Item>
+              ))
+            }
           </List>
         </div>
         <div>
-          <Header as="h1">Here should all the posts be shown</Header>
-          <List>
-            <List.Item>Here should all the categories be listed</List.Item>
-            <List.Item>Here should all the categories be listed</List.Item>
-            <List.Item>Here should all the categories be listed</List.Item>
-          </List>
-        </div>
-        <div>
-          Control for changing the order of the posts list.
-        </div>
-        <div>
-          Add new post
+          <Header as="h1">All posts</Header>
+            <div style={{ marginBottom: 10 }}>
+              <Grid columns={2}>
+                <Grid.Row>
+                  <Grid.Column>
+                    <Dropdown
+                      placeholder="Sort"
+                      fluid
+                      selection
+                      options={sortOptions}
+                      onChange={(e, data) => {
+                        this.setState({
+                          sort: data.value,
+                        })
+                      }}
+                    />
+                  </Grid.Column>
+                  <Grid.Column>
+                    <Link to="/create">
+                      <Button color="green">Click here to create a post</Button>
+                    </Link>
+                  </Grid.Column>
+                </Grid.Row>
+              </Grid>
+           </div>
+           <PostsList sort={this.state.sort} {...this.props}/>
         </div>
       </div>
     )
   }
 }
+
+
+const mapStateToProps = state => {
+  return {
+    categories: state.categories,
+  }
+}
+
+const mapDispatchToProps = dispatch => ({
+  getAllCategories: () => dispatch(getAllCategories()),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
