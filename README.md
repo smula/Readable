@@ -2,14 +2,14 @@
 This is the second project for the Nano degree course readable.
 This project will demonstrate my skills in state management and redux.
 
-## Usage
+## Setup
 
 * Install and start the server
-    - `cd server`
+    - `cd API`
     - `npm install`
     - `node server`
 
 * In another terminal window
-    - `cd react-ui`
+    - `cd frontend`
     - `npm intall`
     - `npm start`
