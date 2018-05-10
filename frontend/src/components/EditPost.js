@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, Header, Form, Icon } from 'semantic-ui-react';
+import { Button, Modal, Form, Icon } from 'semantic-ui-react';
 
 class EditPost extends Component {
   constructor(props) {

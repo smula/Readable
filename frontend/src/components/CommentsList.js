@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Loader, List, Header, Button, Card, Icon } from 'semantic-ui-react';
-import { getPostComments, createPostComments, updatePostComments, deletePostComments, votePostComments } from '../store/actions';
+import { Loader, Header, Button, Card, Icon } from 'semantic-ui-react';
+import {
+  getPostComments,
+  createPostComments,
+  updatePostComments,
+  deletePostComments,
+  votePostComments,
+} from '../store/actions';
 import EditComment from './EditComment';
 
 class CommentsList extends Component {
