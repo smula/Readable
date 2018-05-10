@@ -9,6 +9,7 @@ import EditPost from './EditPost';
 class PostDetail extends Component {
   state = {
     currentPost: null,
+    notFound: false,
   }
   componentWillMount() {
     const { posts, match } = this.props;
@@ -25,6 +26,11 @@ class PostDetail extends Component {
     const currentPost = posts.find(post => {
       return post.id === id;
     });
+    if (currentPost === undefined) {
+      this.setState({
+        notFound: true,
+      });
+    }
     return currentPost
   }
 
@@ -45,7 +51,7 @@ class PostDetail extends Component {
   }
 
   render() {
-    const { currentPost } = this.state;
+    const { currentPost, notFound } = this.state;
     if (currentPost) {
       return (
         <div>
@@ -134,6 +140,14 @@ class PostDetail extends Component {
           <div>
             <CommentsList currentPost={currentPost} {...this.props}/>
           </div>
+        </div>
+      );
+    } else if (notFound) {
+      return (
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flex: 1 }}>
+          <Header as="h1">
+            Post not found
+          </Header>
         </div>
       );
     }
