@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { List, Header, Dropdown, Card, Button, Grid } from 'semantic-ui-react';
-import { getAllCategories } from '../store/actions';
+import { List, Header, Dropdown, Button, Grid } from 'semantic-ui-react';
+import { getAllCategories, createPosts } from '../store/actions';
 import PostsList from './PostsList';
+import EditPost from './EditPost';
 
 class Home extends Component {
   state = {
@@ -11,13 +12,8 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    //console.log('mounted')
-    console.log(this.props)
-    const { getAllCategories } = this.props;
-   
-    getAllCategories();
+    this.props.getAllCategories();
   }
-
 
   render() {
     const sortOptions = [
@@ -46,6 +42,11 @@ class Home extends Component {
                 </List.Item>
               ))
             }
+            <List.Item>
+              <Link to={'/'}>
+                <Button>Clear Category</Button>
+              </Link>
+            </List.Item>
           </List>
         </div>
         <div>
@@ -67,9 +68,9 @@ class Home extends Component {
                     />
                   </Grid.Column>
                   <Grid.Column>
-                    <Link to="/create">
-                      <Button color="green">Click here to create a post</Button>
-                    </Link>
+                    <EditPost
+                      createPost={params => this.props.createPost(params)}
+                    />
                   </Grid.Column>
                 </Grid.Row>
               </Grid>
@@ -90,6 +91,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   getAllCategories: () => dispatch(getAllCategories()),
+  createPost: params => dispatch(createPosts(params)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

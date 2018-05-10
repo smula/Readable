@@ -1,4 +1,4 @@
-import { fetchCategories, fetchCategory } from '../api';
+import { fetchCategories } from '../api';
 
 export const SET_CATEGORIES = 'SET_CATEGORIES';
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './Home';
-import Category from './Category';
 import Edit from './Edit';
 import Create from './Create';
 import PostDetail from './PostDetail';
