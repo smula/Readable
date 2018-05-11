@@ -4,6 +4,7 @@ import { Button, Modal, Form, Icon } from 'semantic-ui-react';
 const defaultState = {
   author: '',
   comment: '',
+  btnDisabled: true,
   open: false,
 }
 
@@ -23,8 +24,16 @@ class EditComment extends Component {
 
   handleChange(e) {
     const { value, name } = e.target;
+    const { author, comment } = this.state;
+    let btnDisabled = true;
+  
+    if ((name.length > 0 && author.length > 0) || (name.length > 0 && comment.length > 0)) {
+      btnDisabled = false;
+    }
+
     this.setState({
       [name]: value,
+      btnDisabled,
     });
   }
 
@@ -47,10 +56,6 @@ class EditComment extends Component {
     })
   }
 
-  // handleValidation() {
-  //   if ()
-  // }
-
   renderEdit() {
     if (!this.props.editing) {
       return (
@@ -60,7 +65,7 @@ class EditComment extends Component {
           onUnmount={() => this.handleUnmount()}
           trigger={
             <Button
-              onClick={() => this.toggleForm}
+              onClick={() => this.toggleForm()}
             >
               Add Comment
             </Button>
@@ -96,7 +101,7 @@ class EditComment extends Component {
                     onChange={this.handleChange}
                   />
                 </Form.Field>
-                <Button type='submit'>Submit</Button>
+                <Button type='submit' disabled={this.state.btnDisabled}>Submit</Button>
                 <Button color="red" onClick={() => this.toggleForm()}>Close</Button>    
               </Form>
             </Modal.Description>
@@ -112,9 +117,7 @@ class EditComment extends Component {
         onUnmount={() => this.handleUnmount()}
         trigger={
           <Button
-            onClick={() => this.setState({
-              open: true,
-            })}
+            onClick={() => this.toggleForm()}
           >
             Click here to edit
           </Button>}>
@@ -147,7 +150,7 @@ class EditComment extends Component {
                   onChange={this.handleChange}
                 />
               </Form.Field>
-              <Button type='submit'>Submit</Button>
+              <Button type='submit' disabled={this.state.btnDisabled}>Submit</Button>
               <Button color="red" onClick={() => this.toggleForm()}>Close</Button>
             </Form>
           </Modal.Description>

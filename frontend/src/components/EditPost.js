@@ -7,6 +7,7 @@ const defaultState = {
   title: '',
   category: '',
   open: false,
+  btnDisabled: true,
 }
 
 class EditPost extends Component {
@@ -26,8 +27,40 @@ class EditPost extends Component {
 
   handleChange(e) {
     const { value, name } = e.target;
+    const { author, body, title, category } = this.state;
+    let btnDisabled = true;
+    let fields = [
+      {
+        name: 'author',
+        value: author,
+      },
+      {
+        name: 'body',
+        value: body,
+      },
+      {
+        name: 'title',
+        value: title,
+      },
+      {
+        name: 'category',
+        value: category,
+      }
+    ];
+
+    const shouldBeDisabled = fields.map((field, index) => {
+      if (field.name === name) {
+        return value.length;
+      }
+      return field.value.length;
+    });
+    if (shouldBeDisabled.indexOf(0) < 0) {
+      btnDisabled = false;
+    }
+
     this.setState({
       [name]: value,
+      btnDisabled,
     });
   }
 
@@ -36,6 +69,8 @@ class EditPost extends Component {
       author: this.props.post.author,
       body: this.props.post.body,
       title: this.props.post.title,
+      category: this.props.post.category,
+      btnDisabled: false,
     });
   }
 
@@ -115,7 +150,7 @@ class EditPost extends Component {
                     onChange={this.handleChange}
                   />
                 </Form.Field>
-                <Button type='submit'>Submit</Button>
+                <Button type='submit' disabled={this.state.btnDisabled}>Submit</Button>
                 <Button color="red" onClick={() => this.toggleForm()}>Close</Button>                
               </Form>
             </Modal.Description>
@@ -161,6 +196,16 @@ class EditPost extends Component {
                 />
               </Form.Field>
               <Form.Field>
+                <label>Category</label>
+                <input
+                  placeholder="Category"
+                  name="category"
+                  value={this.state.category}
+                  onChange={this.handleChange}
+                  disabled
+                />
+              </Form.Field>
+              <Form.Field>
                 <label>Title</label>
                 <input
                   placeholder="Title"
@@ -178,7 +223,7 @@ class EditPost extends Component {
                   onChange={this.handleChange}
                 />
               </Form.Field>
-              <Button type='submit'>Submit</Button>
+              <Button type='submit' disabled={this.state.btnDisabled}>Submit</Button>
               <Button color="red" onClick={() => this.toggleForm()}>Close</Button>                              
             </Form>
           </Modal.Description>
