@@ -114,7 +114,7 @@ class EditPost extends Component {
                   category: this.state.category,
                 })
               }>
-                <Form.Field>
+                <Form.Field required>
                   <label>Author</label>
                   <input
                     placeholder='Author'
@@ -123,7 +123,7 @@ class EditPost extends Component {
                     onChange={this.handleChange}
                   />
                 </Form.Field>
-                <Form.Field>
+                <Form.Field required>
                   <label>Category</label>
                   <input
                     placeholder="Category"
@@ -132,7 +132,7 @@ class EditPost extends Component {
                     onChange={this.handleChange}
                   />
                 </Form.Field>
-                <Form.Field>
+                <Form.Field required>
                   <label>Title</label>
                   <input
                     placeholder="Title"
@@ -141,7 +141,7 @@ class EditPost extends Component {
                     onChange={this.handleChange}
                   />
                 </Form.Field>
-                <Form.Field>
+                <Form.Field required>
                   <label>Body</label>
                   <input
                     placeholder="Body"
@@ -205,7 +205,7 @@ class EditPost extends Component {
                   disabled
                 />
               </Form.Field>
-              <Form.Field>
+              <Form.Field required>
                 <label>Title</label>
                 <input
                   placeholder="Title"
@@ -214,7 +214,7 @@ class EditPost extends Component {
                   onChange={this.handleChange}
                 />
               </Form.Field>
-              <Form.Field>
+              <Form.Field required>
                 <label>body</label>
                 <input
                   placeholder="body"

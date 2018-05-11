@@ -26,8 +26,24 @@ class EditComment extends Component {
     const { value, name } = e.target;
     const { author, comment } = this.state;
     let btnDisabled = true;
-  
-    if ((name.length > 0 && author.length > 0) || (name.length > 0 && comment.length > 0)) {
+    let fields = [
+      {
+        name: 'author',
+        value: author,
+      },
+      {
+        name: 'comment',
+        value: comment,
+      }
+    ];
+
+    const shouldBeDisabled = fields.map((field, index) => {
+      if (field.name === name) {
+        return value.length;
+      }
+      return field.value.length;
+    });
+    if (shouldBeDisabled.indexOf(0) < 0) {
       btnDisabled = false;
     }
 
@@ -41,6 +57,7 @@ class EditComment extends Component {
     this.setState({
       author: this.props.comment.author,
       comment: this.props.comment.body,
+      btnDisabled: false,
     });
   }
 
@@ -131,7 +148,7 @@ class EditComment extends Component {
                 commentId: this.props.comment.id,
               })
             }>
-              <Form.Field required>
+              <Form.Field>
                 <label><Icon name='user' /> Author</label>
                 <input
                   placeholder="Author"
