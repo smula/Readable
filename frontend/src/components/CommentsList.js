@@ -9,7 +9,7 @@ import {
   votePostComments,
   getSinglePost,
 } from '../store/actions';
-import { formatTime } from '../utilities'
+import { formatTime } from '../utilities';
 import EditComment from './EditComment';
 
 class CommentsList extends Component {
