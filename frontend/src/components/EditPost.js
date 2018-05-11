@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import { Button, Modal, Form, Icon } from 'semantic-ui-react';
 
+const defaultState = {
+  author: '',
+  body: '',
+  title: '',
+  category: '',
+  open: false,
+}
+
 class EditPost extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      author: '',
-      body: '',
-      title: '',
-      category: '',
-      open: false,
-    }
+    this.state = defaultState;
 
     this.handleChange = this.handleChange.bind(this);
     this.handleIsEditing = this.handleIsEditing.bind(this);
@@ -39,13 +41,7 @@ class EditPost extends Component {
 
   handleUnmount() {
     if (!this.props.editing) {
-      this.setState({
-        author: '',
-        body: '',
-        title: '',
-        category: '',
-        open: false,
-      });
+      this.setState(defaultState);
     }
   }
 

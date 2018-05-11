@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import { Button, Modal, Form, Icon } from 'semantic-ui-react';
 
+const defaultState = {
+  author: '',
+  comment: '',
+  open: false,
+}
+
 class EditComment extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      author: '',
-      comment: '',
-      open: false,
-    }
-
+    this.state = defaultState;
     this.handleChange = this.handleChange.bind(this);
     this.handleIsEditing = this.handleIsEditing.bind(this);
   }
@@ -36,11 +37,7 @@ class EditComment extends Component {
 
   handleUnmount() {
     if (!this.props.editing) {
-      this.setState({
-        author: '',
-        comment: '',
-        open: false,
-      });
+      this.setState(defaultState);
     }
   }
 
@@ -55,11 +52,7 @@ class EditComment extends Component {
       return (
         <Modal
           open={this.state.open}
-          onSubmit={() => {
-            this.setState({
-              open: false,
-            });
-          }}
+          onSubmit={() => this.toggleForm()}
           onUnmount={() => this.handleUnmount()}
           trigger={
             <Button
