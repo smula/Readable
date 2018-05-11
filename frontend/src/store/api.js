@@ -45,6 +45,17 @@ export const fetchPosts = () =>
     .then(res => res.json())
     .then(res => res)
 
+export const fetchSinglePost = ({ postId }) =>
+  fetch(`${api}/posts/${postId}`, {
+    method: 'GET',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+  })
+    .then(res => res.json())
+    .then(res => res)
+
 export const createNewPost = ({ title, body, author, category }) =>
   fetch(`${api}/posts`, {
     method: 'POST',

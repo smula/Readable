@@ -7,6 +7,7 @@ import {
   updatePostComments,
   deletePostComments,
   votePostComments,
+  getSinglePost,
 } from '../store/actions';
 import EditComment from './EditComment';
 
@@ -97,6 +98,7 @@ class CommentsList extends Component {
         </Header>
         <EditComment
           createComment={params => this.props.createPostComments(params)}
+          getSinglePost={postId => this.props.getSinglePost(postId)}
           postId={this.props.match.params.id}
       />
         {this.renderComments()}
@@ -113,6 +115,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   getPostComments: postId => dispatch(getPostComments(postId)),
+  getSinglePost: postId => dispatch(getSinglePost(postId)),
   createPostComments: params => dispatch(createPostComments(params)),
   updateComment: params => dispatch(updatePostComments(params)),
   deleteComment: params => dispatch(deletePostComments(params)),

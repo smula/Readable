@@ -68,13 +68,15 @@ class EditComment extends Component {
           <Modal.Header>Add Comment</Modal.Header>
           <Modal.Content>
             <Modal.Description>
-              <Form onSubmit={() =>
+              <Form onSubmit={() => {
                 this.props.createComment({
                   body: this.state.comment,
                   author: this.state.author,
                   parentId: this.props.postId,
+                }).then(() => {
+                  this.props.getSinglePost({ postId: this.props.postId });
                 })
-              }>
+              }}>
                 <Form.Field>
                   <label>Author</label>
                   <input

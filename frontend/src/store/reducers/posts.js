@@ -12,6 +12,7 @@ function posts(state = [], action) {
       ];
     case actionTypes.UPDATE_POST:
     case actionTypes.VOTE_POST:
+    case actionTypes.SET_SINGLE_POST:
       state.forEach((post, index) => {
         if (post.id === action.post.id) {
           state.splice(index, 1);

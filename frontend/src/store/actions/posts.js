@@ -1,5 +1,6 @@
 import {
   fetchPosts,
+  fetchSinglePost,
   fetchCategoryPosts,
   updateVotePost,
   edtiPostDetails,
@@ -8,6 +9,7 @@ import {
 } from '../api';
 
 export const SET_POSTS = 'SET_POSTS';
+export const SET_SINGLE_POST = 'SET_SINGLE_POST';
 export const SET_CATEGORY_POSTS = 'SET_CATEGORY_POSTS';
 export const VOTE_POST = 'VOTE_POST';
 export const CREATE_POST = 'CREATE_POST';
@@ -19,6 +21,15 @@ export function getAllPosts() {
     return fetchPosts()
       .then(data => {
         dispatch(setAllPosts(data))
+      })
+  }
+}
+
+export function getSinglePost(postId) {
+  return dispatch => {
+    return fetchSinglePost(postId)
+      .then(data => {
+        dispatch(setSinglePost(data))
       })
   }
 }
@@ -72,6 +83,13 @@ export function setAllPosts(posts) {
   return {
     type: SET_POSTS,
     posts,
+  }
+}
+
+export function setSinglePost(post) {
+  return {
+    type: SET_SINGLE_POST,
+    post,
   }
 }
 
