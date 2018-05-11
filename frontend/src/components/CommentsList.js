@@ -9,6 +9,7 @@ import {
   votePostComments,
   getSinglePost,
 } from '../store/actions';
+import { formatTime } from '../utilities'
 import EditComment from './EditComment';
 
 class CommentsList extends Component {
@@ -19,16 +20,6 @@ class CommentsList extends Component {
   componentWillMount() {
     const { match, getPostComments, createPostComments } = this.props;
     getPostComments(match.params.id);
-  }
-
-  formatTime(unixTimestamp) {
-    const date = new Date(unixTimestamp);
-    const year = date.getFullYear();
-    const month = date.getMonth() > 9 ? date.getMonth() : `0${date.getMonth()}`;
-    const day = date.getDay() > 9 ? date.getDay() : `0${date.getDay()}`;
-    const formatedTime = `${year}-${month}-${day}`;
-
-    return formatedTime;
   }
 
   renderComments() {
@@ -48,7 +39,7 @@ class CommentsList extends Component {
                       Score: {comment.voteScore}
                     </div>
                     <div>
-                      Date: {this.formatTime(comment.timestamp)}
+                      Date: {formatTime(comment.timestamp)}
                     </div>
                     <EditComment
                       editing

@@ -47,6 +47,10 @@ class EditComment extends Component {
     })
   }
 
+  // handleValidation() {
+  //   if ()
+  // }
+
   renderEdit() {
     if (!this.props.editing) {
       return (
@@ -56,9 +60,7 @@ class EditComment extends Component {
           onUnmount={() => this.handleUnmount()}
           trigger={
             <Button
-              onClick={() => this.setState({
-                open: true,
-              })}
+              onClick={() => this.toggleForm}
             >
               Add Comment
             </Button>
@@ -76,7 +78,7 @@ class EditComment extends Component {
                   this.props.getSinglePost({ postId: this.props.postId });
                 })
               }}>
-                <Form.Field>
+                <Form.Field required>
                   <label>Author</label>
                   <input
                     placeholder='Author'
@@ -85,7 +87,7 @@ class EditComment extends Component {
                     onChange={this.handleChange}
                   />
                 </Form.Field>
-                <Form.Field>
+                <Form.Field required>
                   <label>Comment</label>
                   <input
                     placeholder="Comment"
@@ -126,7 +128,7 @@ class EditComment extends Component {
                 commentId: this.props.comment.id,
               })
             }>
-              <Form.Field>
+              <Form.Field required>
                 <label><Icon name='user' /> Author</label>
                 <input
                   placeholder="Author"
@@ -136,7 +138,7 @@ class EditComment extends Component {
                   disabled
                 />
               </Form.Field>
-              <Form.Field>
+              <Form.Field required>
                 <label>Comment</label>
                 <input
                   placeholder="Comment"

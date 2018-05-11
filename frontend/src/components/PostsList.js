@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Card, Button } from 'semantic-ui-react';
 import { getAllPosts, getCategoryPosts, editPosts, deletePosts, votePosts } from '../store/actions';
 import EditPost from './EditPost';
+import { formatTime } from '../utilities';
 
 class PostsList extends Component {
   state = {
@@ -43,16 +44,6 @@ class PostsList extends Component {
     }
   }
 
-  formatTime(unixTimestamp) {
-    const date = new Date(unixTimestamp);
-    const year = date.getFullYear();
-    const month = date.getMonth() > 9 ? date.getMonth() : `0${date.getMonth()}`;
-    const day = date.getDay() > 9 ? date.getDay() : `0${date.getDay()}`;
-    const formatedTime = `${year}-${month}-${day}`
-
-    return formatedTime;
-  }
-
   render() {
     return (
       <div>
@@ -74,7 +65,7 @@ class PostsList extends Component {
                   Score: { post.voteScore }
                 </div>
                 <div>
-                  Date: { this.formatTime(post.timestamp)}
+                  Date: { formatTime(post.timestamp)}
                 </div>
                 <div>
                   Comments: {post.commentCount}
