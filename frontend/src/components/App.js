@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './Home';
-import Edit from './Edit';
 import Create from './Create';
 import PostDetail from './PostDetail';
 import '../App.css';
@@ -19,11 +18,8 @@ const App = () => (
         <Route exact path="/:category/posts" render={props => (
           <Home {...props} />
         )}/>
-        <Route exact path="/posts/:id" render={props => (
+        <Route exact path="/:category/:id" render={props => (
           <PostDetail {...props} />
-        )}/>
-        <Route exact path="/:category/:id/edit" render={() => (
-          <Edit />
         )}/>
       </Switch>
     </div>

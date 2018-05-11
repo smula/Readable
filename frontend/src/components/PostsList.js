@@ -63,7 +63,7 @@ class PostsList extends Component {
           }).map((post, index) => (
             <Card key={`${post.id}`} style={{ width: '100%', marginTop: 10, marginBottom: 10 }}>
               <Card.Content>
-                <Link to={`/posts/${post.id}`}>
+                <Link to={`/${post.category}/${post.id}`}>
                   <Card.Header>{post.title}</Card.Header>
                   <Card.Meta>{post.author}</Card.Meta>
                   <Card.Description>{post.body}</Card.Description>
