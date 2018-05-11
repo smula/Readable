@@ -76,6 +76,9 @@ class PostsList extends Component {
                 <div>
                   Date: { this.formatTime(post.timestamp)}
                 </div>
+                <div>
+                  Comments: {post.commentCount}
+                </div>
                 <Button
                   color="green"
                   onClick={() => this.props.votePost({ postId: post.id, voteType: 'upVote' })}
