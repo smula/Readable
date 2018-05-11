@@ -144,10 +144,13 @@ class PostDetail extends Component {
       );
     } else if (notFound) {
       return (
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flex: 1 }}>
+        <div style={{ flexDirection: 'column', display: 'flex', justifyContent: 'center', alignItems: 'center', flex: 1 }}>
           <Header as="h1">
             Post not found
           </Header>
+          <Link to="/">
+            <Button>Return Home</Button>
+          </Link>
         </div>
       );
     }

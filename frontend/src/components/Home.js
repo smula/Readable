@@ -44,7 +44,7 @@ class Home extends Component {
             }
             <List.Item>
               <Link to={'/'}>
-                <Button>Clear Category</Button>
+                <Button>All Posts</Button>
               </Link>
             </List.Item>
           </List>

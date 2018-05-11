@@ -49,16 +49,18 @@ class EditPost extends Component {
     }
   }
 
+  toggleForm() {
+    this.setState({
+      open: !this.state.open,
+    })
+  }
+
   renderEdit() {
     if (!this.props.editing) {
       return (
         <Modal
           open={this.state.open}
-          onSubmit={() => {
-            this.setState({
-              open: false,
-            });
-          }}
+          onSubmit={() => this.toggleForm()}
           onUnmount={() => this.handleUnmount()}
           trigger={
             <Button
@@ -118,7 +120,7 @@ class EditPost extends Component {
                   />
                 </Form.Field>
                 <Button type='submit'>Submit</Button>
-                <Button color="red" onClick={() => this.setState({ open: false })}>Close</Button>                
+                <Button color="red" onClick={() => this.toggleForm()}>Close</Button>                
               </Form>
             </Modal.Description>
           </Modal.Content>
@@ -129,11 +131,7 @@ class EditPost extends Component {
     return (
       <Modal
         open={this.state.open}
-        onSubmit={() => {
-          this.setState({
-            open: false,
-          });
-        }}
+        onSubmit={() => this.toggleForm()}
         onUnmount={() => this.handleUnmount()}
         trigger={
           <Button
@@ -185,7 +183,7 @@ class EditPost extends Component {
                 />
               </Form.Field>
               <Button type='submit'>Submit</Button>
-              <Button color="red" onClick={() => this.setState({ open: false })}>Close</Button>                              
+              <Button color="red" onClick={() => this.toggleForm()}>Close</Button>                              
             </Form>
           </Modal.Description>
         </Modal.Content>
